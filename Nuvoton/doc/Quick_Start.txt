@@ -1,0 +1,17 @@
+[OpenWrt 21.02 for MA35D1]
+
+Please notice this version is only workable for MA35D1 SOM 256M board using SPINAND now.
+
+1) Download the MA35D1_OpenWrt source code
+2) Run "./scripts/feeds update -a" to update the OpenWrt feeds script
+3) Run "./scripts/feeds install -a" to install the OpenWrt feeds script
+4) Run "cp Nuvoton/config/config_ma35d1_som .config" to set OpenWrt configurations
+5) Run "make menuconfig" to confirm the target board is SOM board, then do exit directly
+6) Run "make kernel_menuconfig" to compile related packages and download MA35D1 Linux BSP, this step may need 90 mins, then do exit and save config directly
+7) Run "make" to build image, this step may need 30 mins
+8) The output file is bin/targets/ma35d1/som/openwrt-ma35d1-som-som-pack-spinand.bin, use NuWriter to flash the pack image
+
+P.S. Should any error occur during compilation, use "make -j1 V=sc" command to gather error log for further investigation
+
+2022/07/29
+
