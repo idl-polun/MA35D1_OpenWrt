@@ -12,8 +12,8 @@ PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/OpenNuvoton/MA35D1_u-boot-v2020.07.git
-PKG_SOURCE_DATE:=2022-06-23
-PKG_SOURCE_VERSION:=444d6693f5ee929e34d9877c170701cfdfca5536
+PKG_SOURCE_DATE:=2022-08-05
+PKG_SOURCE_VERSION:=4faa8c8a645b743fc3c2bad915343d0ae4c8f98a
 
 include $(INCLUDE_DIR)/u-boot.mk
 include $(INCLUDE_DIR)/package.mk
@@ -46,6 +46,8 @@ define Build/InstallDev
 	)
 	$(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-fiptool create \
 		--soc-fw $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-bl31.bin \
+		--tos-fw $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-tee-header_v2.bin \
+		--tos-fw-extra1 $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-tee-pager_v2.bin \
 		--nt-fw $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-u-boot.bin \
 		$(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-fip.bin
 endef

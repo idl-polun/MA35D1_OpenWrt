@@ -18,13 +18,11 @@ UBI_OPTS = -m 2048 -p 128KiB -s 2048 -O 2048
 DEVICE_VARS += MKUBIFS_OPTS UBOOT BOOT_SCRIPT
 
 define Image/BuildKernel
-	$(CP) $(KDIR)/linux-git_github_com_OpenNuvoton_MA35D1_linux_5_4_y_git-HEAD/arch/arm64/boot/dts/nuvoton/ma35d1-som-256m.dtb \
+	$(CP) $(KDIR)/linux-*github_com_OpenNuvoton_MA35D1_linux_5_4_y_git-master/arch/arm64/boot/dts/nuvoton/ma35d1-som-256m.dtb \
 		$(KDIR)/som.dtb
-	$(CP) $(KDIR)/linux-git_github_com_OpenNuvoton_MA35D1_linux_5_4_y_git-HEAD/arch/arm64/boot/dts/nuvoton/ma35d1-iot-512m.dtb \
+	$(CP) $(KDIR)/linux-*github_com_OpenNuvoton_MA35D1_linux_5_4_y_git-master/arch/arm64/boot/dts/nuvoton/ma35d1-iot-512m.dtb \
 		$(KDIR)/iot.dtb
-	$(CP) $(KDIR)/$(SUBTARGET).dtb $(BIN_DIR)/$(IMG_PREFIX)-$(SUBTARGET).dtb
 	$(CP) $(KDIR)/$(SUBTARGET).dtb $(STAGING_DIR_IMAGE)/$(IMG_PREFIX)-$(SUBTARGET).dtb
-#	$(CP) $(KDIR)/../../../Nuvoton/uboot_env/$(IMG_PREFIX)-$(SUBTARGET)-u-boot-env.txt $(BIN_DIR)/
 endef
 
 define Image/Build

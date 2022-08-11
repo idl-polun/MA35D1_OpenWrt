@@ -11,8 +11,8 @@ PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=https://github.com/OpenNuvoton/MA35D1_arm-trusted-firmware-v2.3.git
-PKG_SOURCE_DATE:=2022-06-29
-PKG_SOURCE_VERSION:=e5a826ba1606a3fd55ecbe0712b90e06b943f444
+PKG_SOURCE_DATE:=2022-07-26
+PKG_SOURCE_VERSION:=64cc1d801ec4834e80dc6d816b5d1e70063f1f9c
 
 PKG_MAINTAINER:=Chih-Chiang Chang <ccchang12@nuvoton.com>
 
@@ -43,7 +43,7 @@ TFA_TARGETS:= \
         som \
         iot
 
-TFA_MAKE_FLAGS += all dtbs fiptool
+TFA_MAKE_FLAGS += NEED_BL32=yes all dtbs fiptool
 
 define Package/trusted-firmware-a/install
 	$(INSTALL_DIR) $(STAGING_DIR_IMAGE)
