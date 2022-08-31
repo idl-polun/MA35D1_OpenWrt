@@ -24,28 +24,21 @@ define Optee/Default
   OPTEE_IMAGE:=tee.bin tee-pager_v2.bin tee-pageable_v2.bin tee-header_v2.bin
 endef
 
-define Optee/som
-  NAME:=MA35D1 SOM board
-  BUILD_SUBTARGET:=som
-endef
-
-define Optee/iot
-  NAME:=MA35D1 IoT board
-  BUILD_SUBTARGET:=iot
+define Optee/generic
+  NAME:=MA35D1 board
 endef
 
 OPTEE_TARGETS := \
-	som \
-	iot
+	generic
 
 OPTEE_MAKE_FLAGS += all
 
 define Package/optee/install
 	$(INSTALL_DIR) $(STAGING_DIR_IMAGE)
-	$(INSTALL_DATA) $(PKG_BUILD_DIR)/out/arm-plat-nuvoton/core/tee.bin $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-tee.bin
-	$(INSTALL_DATA) $(PKG_BUILD_DIR)/out/arm-plat-nuvoton/core/tee-pager_v2.bin $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-tee-pager_v2.bin
-	$(INSTALL_DATA) $(PKG_BUILD_DIR)/out/arm-plat-nuvoton/core/tee-pageable_v2.bin $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-tee-pageable_v2.bin
-	$(INSTALL_DATA) $(PKG_BUILD_DIR)/out/arm-plat-nuvoton/core/tee-header_v2.bin $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-tee-header_v2.bin
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/out/arm-plat-nuvoton/core/tee.bin $(STAGING_DIR_IMAGE)/tee.bin
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/out/arm-plat-nuvoton/core/tee-pager_v2.bin $(STAGING_DIR_IMAGE)/tee-pager_v2.bin
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/out/arm-plat-nuvoton/core/tee-pageable_v2.bin $(STAGING_DIR_IMAGE)/tee-pageable_v2.bin
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/out/arm-plat-nuvoton/core/tee-header_v2.bin $(STAGING_DIR_IMAGE)/tee-header_v2.bin
 endef
 
 $(eval $(call BuildPackage/Optee))

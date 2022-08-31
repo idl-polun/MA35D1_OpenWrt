@@ -33,12 +33,7 @@
         },
         {
           "offset": "0x400000",
-          "file": "Image",
-          "type": 1
-	},
-        {
-          "offset": "0x1C00000",
-          "file": "rootfs.ubi",
+          "file": "firmware.bin",
           "type": 1
         }
     ]

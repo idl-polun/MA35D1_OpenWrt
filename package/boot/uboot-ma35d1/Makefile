@@ -23,33 +23,32 @@ define U-Boot/Default
   UBOOT_IMAGE:=u-boot.bin
 endef
 
-define U-Boot/som
-  NAME:=MA35D1 SOM board
-  BUILD_SUBTARGET:=som
+define U-Boot/spinand
+  NAME:=MA35D1 board using SPI NAND
   UBOOT_CONFIG:=ma35d1_spinand
 endef
 
-define U-Boot/iot
-  NAME:=MA35D1 IoT board
-  BUILD_SUBTARGET:=iot
-  UBOOT_CONFIG:=ma35d1_spinand
+define U-Boot/nand
+  NAME:=MA35D1 board using NAND
+  UBOOT_CONFIG:=ma35d1_nand
 endef
 
 UBOOT_TARGETS := \
-	som \
-	iot
+	spinand \
+	nand
 
 define Build/InstallDev
+	echo UBOOT_CONFIG=$(UBOOT_CONFIG) >> /tmp/openwrt.env
 	$(INSTALL_DIR) $(STAGING_DIR_IMAGE)
 	$(foreach img,$(UBOOT_IMAGE), \
-		$(CP) $(PKG_BUILD_DIR)/$(img) $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-$(img); \
+		$(CP) $(PKG_BUILD_DIR)/$(img) $(STAGING_DIR_IMAGE)/$(img); \
 	)
-	$(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-fiptool create \
-		--soc-fw $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-bl31.bin \
-		--tos-fw $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-tee-header_v2.bin \
-		--tos-fw-extra1 $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-tee-pager_v2.bin \
-		--nt-fw $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-u-boot.bin \
-		$(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-fip.bin
+	$(STAGING_DIR_IMAGE)/fiptool create \
+		--soc-fw $(STAGING_DIR_IMAGE)/bl31.bin \
+		--tos-fw $(STAGING_DIR_IMAGE)/tee-header_v2.bin \
+		--tos-fw-extra1 $(STAGING_DIR_IMAGE)/tee-pager_v2.bin \
+		--nt-fw $(STAGING_DIR_IMAGE)/u-boot.bin \
+		$(STAGING_DIR_IMAGE)/fip.bin
 endef
 
 $(eval $(call BuildPackage/U-Boot))

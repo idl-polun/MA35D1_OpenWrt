@@ -25,7 +25,7 @@ CONFIG_CMD_EFIDEBUG=y
 CONFIG_CMD_EXT4_WRITE=y
 CONFIG_CMD_MTDPARTS=y
 CONFIG_MTDIDS_DEFAULT="nand0=nand0"
-CONFIG_MTDPARTS_DEFAULT="mtdparts=nand0:3m(uboot),768k(uboot-env),256k(device-tree),24m(kernel),100m(rootfs)"
+CONFIG_MTDPARTS_DEFAULT="mtdparts=nand0:3m(uboot),768k(uboot-env),256k(device-tree),-(firmware)"
 CONFIG_CMD_UBI=y
 CONFIG_PARTITION_TYPE_GUID=y
 CONFIG_DEFAULT_DEVICE_TREE="ma35d1"

@@ -1071,7 +1071,7 @@
 				reg = <0x3C0000 0x40000>;
 			};
 			kernel@400000 {
-				label = "kernel";
+				label = "firmware";
 				reg = <0x400000 0x0>;
 			};
 		};

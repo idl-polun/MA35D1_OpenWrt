@@ -29,33 +29,84 @@ define Trusted-Firmware-A/Default
   DDR_BLOB:=
 endef
 
-define Trusted-Firmware-A/som
-  BUILD_SUBTARGET:=som
-  NAME:=MA35D1 SOM Board
+define Trusted-Firmware-A/ma35d1-cpu800-wb-128m
+  NAME:=Winbond
+  TFA_DTB_NAME:=ma35d1-cpu800-wb-128m
 endef
 
-define Trusted-Firmware-A/iot
-  BUILD_SUBTARGET:=iot
-  NAME:=MA35D1 IoT Board
+define Trusted-Firmware-A/ma35d1-cpu800-wb-256m
+  NAME:=Winbond
+  TFA_DTB_NAME:=ma35d1-cpu800-wb-256m
+endef
+
+define Trusted-Firmware-A/ma35d1-cpu800-wb-512m
+  NAME:=Winbond
+  TFA_DTB_NAME:=ma35d1-cpu800-wb-512m
+endef
+
+define Trusted-Firmware-A/ma35d1-cpu1g-wb-256m
+  NAME:=Winbond
+  TFA_DTB_NAME:=ma35d1-cpu1g-wb-256m
+endef
+
+define Trusted-Firmware-A/ma35d1-cpu1g-wb-512m
+  NAME:=Winbond
+  TFA_DTB_NAME:=ma35d1-cpu1g-wb-512m
+endef
+
+define Trusted-Firmware-A/ma35d1-cpu800-zt-1g
+  NAME:=Zentel
+  TFA_DTB_NAME:=ma35d1-cpu800-zt-1g
+endef
+
+define Trusted-Firmware-A/ma35d1-cpu800-mc-1g
+  NAME:=Micron
+  TFA_DTB_NAME:=ma35d1-cpu800-mc-1g
+endef
+
+define Trusted-Firmware-A/ma35d1-cpu800-issi-1g
+  NAME:=ISSI
+  TFA_DTB_NAME:=ma35d1-cpu800-issi-1g
+endef
+
+define Trusted-Firmware-A/ma35d1-cpu1g-zt-1g
+  NAME:=Zentel
+  TFA_DTB_NAME:=ma35d1-cpu1g-zt-1g
+endef
+
+define Trusted-Firmware-A/ma35d1-cpu1g-mc-1g
+  NAME:=Micron
+  TFA_DTB_NAME:=ma35d1-cpu1g-mc-1g
+endef
+
+define Trusted-Firmware-A/ma35d1-cpu1g-issi-1g
+  NAME:=ISSI
+  TFA_DTB_NAME:=ma35d1-cpu1g-issi-1g
 endef
 
 TFA_TARGETS:= \
-        som \
-        iot
+	ma35d1-cpu800-wb-128m \
+	ma35d1-cpu800-wb-256m \
+	ma35d1-cpu800-wb-512m \
+	ma35d1-cpu1g-wb-256m \
+	ma35d1-cpu1g-wb-512m \
+	ma35d1-cpu800-zt-1g \
+	ma35d1-cpu800-mc-1g \
+	ma35d1-cpu800-issi-1g \
+	ma35d1-cpu1g-zt-1g \
+	ma35d1-cpu1g-mc-1g \
+	ma35d1-cpu1g-issi-1g
 
 TFA_MAKE_FLAGS += NEED_BL32=yes all dtbs fiptool
 
 define Package/trusted-firmware-a/install
+	echo TFA_DTB_NAME=$(TFA_DTB_NAME) > /tmp/openwrt.env
 	$(INSTALL_DIR) $(STAGING_DIR_IMAGE)
-	$(INSTALL_DATA) $(PKG_BUILD_DIR)/build/ma35d1/release/bl2.bin $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-bl2.bin
-	$(INSTALL_DATA) $(PKG_BUILD_DIR)/build/ma35d1/release/bl31.bin $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-bl31.bin
-ifeq ($(SUBTARGET),som)
-	$(INSTALL_DATA) $(PKG_BUILD_DIR)/build/ma35d1/release/fdts/ma35d1-cpu800-wb-256m.dtb $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-bl2.dtb
-else ifeq ($(SUBTARGET),iot)
-	$(INSTALL_DATA) $(PKG_BUILD_DIR)/build/ma35d1/release/fdts/ma35d1-cpu800-wb-512m.dtb $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-bl2.dtb
-endif
-	$(INSTALL_DATA) $(PKG_BUILD_DIR)/tools/fiptool/fiptool $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-fiptool
-	chmod +x $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-fiptool
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/build/ma35d1/release/bl2.bin $(STAGING_DIR_IMAGE)/bl2.bin
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/build/ma35d1/release/bl31.bin $(STAGING_DIR_IMAGE)/bl31.bin
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/build/ma35d1/release/fdts/${TFA_DTB_NAME}.dtb $(STAGING_DIR_IMAGE)/bl2.dtb
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/tools/fiptool/fiptool $(STAGING_DIR_IMAGE)/fiptool
+	chmod +x $(STAGING_DIR_IMAGE)/fiptool
 endef
 
 $(eval $(call BuildPackage/Trusted-Firmware-A))
