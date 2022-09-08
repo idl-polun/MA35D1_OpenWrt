@@ -28,7 +28,6 @@ IMAGE_CMD_spinand() {
 	if [ -f ${STAGING_DIR_IMAGE}/fip.bin ]; then
 		( \
 			cd ${STAGING_DIR_IMAGE}; \
-			ln -sf openwrt-${BOARD}-${SUBTARGET}-${SUBTARGET}.dtb Image.dtb; \
 			ln -sf ${BIN_DIR}/openwrt-${BOARD}-${SUBTARGET}-${DEVICE_NAME}-squashfs-firmware.bin firmware.bin; \
 			cp ${NUWRITER_DIR}/ddrimg_tfa.bin ${STAGING_DIR_IMAGE}; \
 			cp fip.bin fip.bin-spinand; \
@@ -53,7 +52,6 @@ IMAGE_CMD_nand() {
 	if [ -f ${STAGING_DIR_IMAGE}/fip.bin ]; then
 		( \
 			cd ${STAGING_DIR_IMAGE}; \
-			ln -sf openwrt-${BOARD}-${SUBTARGET}-${SUBTARGET}.dtb Image.dtb; \
 			ln -sf ${BIN_DIR}/openwrt-${BOARD}-${SUBTARGET}-${DEVICE_NAME}-squashfs-firmware.bin firmware.bin; \
 			cp ${NUWRITER_DIR}/ddrimg_tfa.bin ${STAGING_DIR_IMAGE}; \
 			cp fip.bin fip.bin-nand; \

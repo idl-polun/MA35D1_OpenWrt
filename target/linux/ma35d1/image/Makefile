@@ -21,7 +21,7 @@ DEVICE_VARS += MKUBIFS_OPTS UBOOT BOOT_SCRIPT
 define Build/copy-dtb
 	echo DEVICE_DTS=$(DEVICE_DTS) >> /tmp/openwrt.env
 	echo DEVICE_NAME=$(DEVICE_NAME) >> /tmp/openwrt.env
-	$(CP) $(KDIR)/image-${BOARD}-$(DEVICE_NAME).dtb $(STAGING_DIR_IMAGE)/$(IMG_PREFIX)-$(SUBTARGET).dtb
+	$(CP) $(KDIR)/image-${BOARD}-$(DEVICE_NAME).dtb $(STAGING_DIR_IMAGE)/Image.dtb
 endef
 
 define Image/Build

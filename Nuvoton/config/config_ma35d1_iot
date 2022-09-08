@@ -45,12 +45,14 @@ CONFIG_TARGET_ma35d1=y
 # CONFIG_TARGET_ma35d1_som is not set
 CONFIG_TARGET_ma35d1_iot=y
 # CONFIG_TARGET_MULTI_PROFILE is not set
-CONFIG_TARGET_ma35d1_iot_DEVICE_iot=y
+# CONFIG_TARGET_ma35d1_iot_Default is not set
+# CONFIG_TARGET_ma35d1_iot_DEVICE_iot-128m is not set
+CONFIG_TARGET_ma35d1_iot_DEVICE_iot-512m=y
 CONFIG_HAS_SUBTARGETS=y
 CONFIG_HAS_DEVICES=y
 CONFIG_TARGET_BOARD="ma35d1"
 CONFIG_TARGET_SUBTARGET="iot"
-CONFIG_TARGET_PROFILE="DEVICE_iot"
+CONFIG_TARGET_PROFILE="DEVICE_iot-512m"
 CONFIG_TARGET_ARCH_PACKAGES="aarch64_cortex-a35"
 CONFIG_DEFAULT_TARGET_OPTIMIZATION="-Os -pipe"
 CONFIG_CPU_TYPE="cortex-a35"
@@ -351,7 +353,7 @@ CONFIG_CCACHE_DIR=""
 CONFIG_EXTERNAL_KERNEL_TREE=""
 CONFIG_KERNEL_GIT_CLONE_URI="git@github.com:OpenNuvoton/MA35D1_linux-5.4.y.git"
 CONFIG_KERNEL_GIT_LOCAL_REPOSITORY=""
-CONFIG_KERNEL_GIT_REF=""
+CONFIG_KERNEL_GIT_REF="master"
 CONFIG_KERNEL_GIT_MIRROR_HASH=""
 # CONFIG_BUILD_LOG is not set
 CONFIG_BUILD_LOG_DIR=""
@@ -1648,8 +1650,20 @@ CONFIG_ZABBIX_POSTGRESQL=y
 #
 # Boot Loaders
 #
-CONFIG_PACKAGE_trusted-firmware-a-iot=y
-CONFIG_PACKAGE_u-boot-iot=y
+CONFIG_PACKAGE_optee-generic=y
+# CONFIG_PACKAGE_trusted-firmware-a-ma35d1-cpu1g-issi-1g is not set
+# CONFIG_PACKAGE_trusted-firmware-a-ma35d1-cpu1g-mc-1g is not set
+# CONFIG_PACKAGE_trusted-firmware-a-ma35d1-cpu1g-wb-256m is not set
+# CONFIG_PACKAGE_trusted-firmware-a-ma35d1-cpu1g-wb-512m is not set
+# CONFIG_PACKAGE_trusted-firmware-a-ma35d1-cpu1g-zt-1g is not set
+# CONFIG_PACKAGE_trusted-firmware-a-ma35d1-cpu800-issi-1g is not set
+# CONFIG_PACKAGE_trusted-firmware-a-ma35d1-cpu800-mc-1g is not set
+# CONFIG_PACKAGE_trusted-firmware-a-ma35d1-cpu800-wb-128m is not set
+# CONFIG_PACKAGE_trusted-firmware-a-ma35d1-cpu800-wb-256m is not set
+CONFIG_PACKAGE_trusted-firmware-a-ma35d1-cpu800-wb-512m=y
+# CONFIG_PACKAGE_trusted-firmware-a-ma35d1-cpu800-zt-1g is not set
+CONFIG_PACKAGE_u-boot-nand=y
+# CONFIG_PACKAGE_u-boot-spinand is not set
 # end of Boot Loaders
 
 #

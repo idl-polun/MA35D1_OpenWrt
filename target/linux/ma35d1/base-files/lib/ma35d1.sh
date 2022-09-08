@@ -14,10 +14,23 @@ ma35d1_board_detect() {
 
 	case "$machine" in
 	"Nuvoton MA35D1-SOM")
-		name="som"
+		if dmesg | grep "mem=2"
+		then
+			name="som-256m"
+		elif dmesg | grep "mem=5"
+		then
+			name="som-512m"
+		else
+			name="som-1g"
+		fi
 		;;
 	"Nuvoton MA35D1-IoT")
-		name="iot"
+		if dmesg | grep "mem=1"
+		then
+			name="iot-128m"
+		else
+			name="iot-512m"
+		fi
 		;;
 	*)
 		name="generic"
